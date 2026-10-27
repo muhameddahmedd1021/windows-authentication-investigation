@@ -1,0 +1,4 @@
+index=_internal sourcetype=scheduler savedsearch_name="Repeated authentication failures - lab validation"
+earliest="10/27/2026:01:23:00" latest="10/27/2026:01:34:00"
+| sort 0 _time
+| table _time status result_count suppressed sid

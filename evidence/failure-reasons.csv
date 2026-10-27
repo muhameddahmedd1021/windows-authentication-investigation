@@ -1,0 +1,4 @@
+LogonType,Status,SubStatus,records
+3,0xc000006d,0xc000006a,31
+3,0xc000006e,0xc0000072,2
+3,0xc0000234,0x0,2

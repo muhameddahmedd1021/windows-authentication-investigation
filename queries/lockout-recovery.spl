@@ -1,0 +1,5 @@
+index=lab_windows host=SOC-DC01 Channel=Security EventCode IN (4624,4625,4740,4767) TargetUserName=lab.lockout
+earliest="10/26/2026:22:00:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time EventCode LogonType IpAddress Status SubStatus EventRecordID

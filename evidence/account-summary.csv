@@ -1,0 +1,10 @@
+TargetUserName,failures,successes
+lab.disabled,2,0
+lab.lockout,7,1
+lab.ops,0,2
+lab.repeat,17,0
+lab.user1,5,3
+lab.user2,1,0
+lab.user3,1,0
+lab.user4,1,0
+lab.user5,1,0

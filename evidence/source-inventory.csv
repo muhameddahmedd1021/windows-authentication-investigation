@@ -1,0 +1,24 @@
+host,Channel,records,first,last
+SOC-DC01,Application,112,10/26/2026 15:39:00,10/26/2026 21:29:27
+SOC-DC01,Microsoft-Windows-PowerShell/Operational,109,10/26/2026 15:40:25,10/26/2026 22:45:22
+SOC-DC01,Microsoft-Windows-Sysmon/Operational,6364,10/26/2026 15:38:40,10/26/2026 23:05:47
+SOC-DC01,Microsoft-Windows-TaskScheduler/Operational,463,10/26/2026 15:38:51,10/26/2026 22:45:51
+SOC-DC01,Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,4,10/26/2026 21:28:42,10/26/2026 21:28:44
+SOC-DC01,Microsoft-Windows-WinRM/Operational,9,10/26/2026 15:40:24,10/26/2026 22:45:11
+SOC-DC01,Security,8953,10/26/2026 15:38:40,10/26/2026 23:05:57
+SOC-DC01,System,421,10/26/2026 15:38:52,10/26/2026 23:05:32
+SOC-SRV01,Application,20,10/26/2026 16:37:02,10/26/2026 22:39:16
+SOC-SRV01,Microsoft-Windows-PowerShell/Operational,70,10/26/2026 15:40:00,10/26/2026 22:45:15
+SOC-SRV01,Microsoft-Windows-Sysmon/Operational,5886,10/26/2026 15:38:40,10/26/2026 23:05:47
+SOC-SRV01,Microsoft-Windows-TaskScheduler/Operational,157,10/26/2026 15:40:23,10/26/2026 22:58:09
+SOC-SRV01,Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational,1,10/26/2026 22:39:36,10/26/2026 22:39:36
+SOC-SRV01,Microsoft-Windows-WinRM/Operational,8,10/26/2026 15:40:24,10/26/2026 22:45:11
+SOC-SRV01,Security,4337,10/26/2026 15:38:40,10/26/2026 23:05:59
+SOC-SRV01,System,185,10/26/2026 15:39:15,10/26/2026 22:59:36
+SOC-WS01,Application,82,10/26/2026 16:29:02,10/26/2026 22:34:37
+SOC-WS01,Microsoft-Windows-PowerShell/Operational,70,10/26/2026 15:40:27,10/26/2026 22:45:15
+SOC-WS01,Microsoft-Windows-Sysmon/Operational,6403,10/26/2026 15:38:43,10/26/2026 23:05:54
+SOC-WS01,Microsoft-Windows-TaskScheduler/Operational,290,10/26/2026 15:41:35,10/26/2026 23:04:27
+SOC-WS01,Microsoft-Windows-WinRM/Operational,8,10/26/2026 15:40:25,10/26/2026 22:45:11
+SOC-WS01,Security,5352,10/26/2026 15:38:43,10/26/2026 23:05:54
+SOC-WS01,System,1164,10/26/2026 15:38:51,10/26/2026 23:05:49

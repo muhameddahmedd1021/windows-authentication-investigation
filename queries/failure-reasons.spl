@@ -1,0 +1,5 @@
+index=lab_windows host IN (SOC-SRV01,SOC-DC01) Channel=Security TargetDomainName=SOC TargetUserName=lab.*
+EventCode IN (4624,4625) earliest="10/26/2026:15:38:40" latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| search EventCode=4625
+| stats count AS records BY LogonType Status SubStatus

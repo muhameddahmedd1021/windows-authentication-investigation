@@ -1,0 +1,4 @@
+_time,TargetUserName,IpAddress,seconds_since_failure,matched,EventRecordID
+2026-10-26 18:50:57,lab.ops,192.168.144.30,,no,19846
+2026-10-26 18:56:47,lab.user1,192.168.144.30,103,yes,19913
+2026-10-26 19:19:14,lab.user1,192.168.144.30,918,no,20145

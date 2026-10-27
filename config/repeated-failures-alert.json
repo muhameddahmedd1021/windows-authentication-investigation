@@ -1,0 +1,22 @@
+{
+  "name": "Repeated authentication failures - lab validation",
+  "test_window": "Recorded Windows authentication events,26October2026",
+  "first_trigger_utc": "2026-10-27T01:24:01Z",
+  "scheduled_evaluations": 10,
+  "results_per_evaluation": 4,
+  "unsuppressed_evaluations": 2,
+  "suppressed_evaluations": 8,
+  "schedule_stopped_utc": "2026-10-27T01:33:20.710620+00:00",
+  "final_settings": {
+    "is_scheduled": false,
+    "disabled": false,
+    "cron_schedule": "* * * * *",
+    "alert.suppress": true,
+    "alert.suppress.period": "300s",
+    "alert.track": true,
+    "alert_type": "number of events",
+    "alert_comparator": "greater than",
+    "alert_threshold": "0",
+    "search": "index=lab_windows host=SOC-SRV01 Channel=Security TargetDomainName=SOC TargetUserName=lab.repeat EventCode=4625 earliest=\"10/26/2026:18:39:00\" latest=\"10/26/2026:23:00:00\"\n| dedup Computer Channel EventRecordID\n| sort 0 _time\n| streamstats time_window=5m count AS failures BY TargetDomainName TargetUserName IpAddress Computer\n| where failures>=3\n| table _time TargetUserName IpAddress failures EventRecordID"
+  }
+}

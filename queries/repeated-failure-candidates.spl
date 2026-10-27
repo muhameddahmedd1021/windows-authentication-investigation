@@ -1,0 +1,7 @@
+index=lab_windows host=SOC-SRV01 Channel=Security TargetDomainName=SOC TargetUserName=lab.repeat
+EventCode=4625 earliest="10/26/2026:18:39:00" latest="10/26/2026:23:00:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| streamstats time_window=5m count AS failures BY TargetDomainName TargetUserName IpAddress Computer
+| where failures>=3
+| table _time TargetUserName IpAddress failures EventRecordID

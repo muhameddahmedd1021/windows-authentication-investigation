@@ -1,0 +1,4 @@
+index=lab_windows Channel=Security TargetUserName=lab.disabled earliest="10/26/2026:21:30:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time host EventCode TargetUserName LogonType IpAddress Status SubStatus EventRecordID

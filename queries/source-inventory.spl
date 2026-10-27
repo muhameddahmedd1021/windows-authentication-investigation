@@ -1,0 +1,4 @@
+index=lab_windows earliest="10/26/2026:15:38:40" latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| stats count AS records earliest(_time) AS first latest(_time) AS last BY host Channel
+| convert ctime(first) ctime(last)

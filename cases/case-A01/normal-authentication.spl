@@ -1,0 +1,5 @@
+index=lab_windows Channel=Security TargetUserName=lab.ops earliest="10/26/2026:23:02:00"
+latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time host EventCode TargetUserName LogonType IpAddress Status EventRecordID

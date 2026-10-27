@@ -1,0 +1,65 @@
+<dashboard version="1.1" theme="light">
+<label>Windows Authentication Investigation</label>
+<description>Network authentication comparisons from the SOC lab on 26 October 2026. Task authentication uses the earlier batch-logon experiment. Times are UTC.</description>
+<row><panel><title>Failed network logons over time</title><chart><search><query>index=lab_windows host IN (SOC-SRV01,SOC-DC01) Channel=Security TargetDomainName=SOC TargetUserName=lab.* EventCode IN (4624,4625) earliest="10/26/2026:15:38:40" latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| search EventCode=4625
+| timechart span=30m count AS failures</query><earliest>0</earliest><latest>now</latest></search>
+<option name="charting.chart">line</option><option name="height">220</option>
+</chart></panel></row>
+<row><panel><title>Failures and successes by source and account</title><table><search><query>index=lab_windows host IN (SOC-SRV01,SOC-DC01) Channel=Security TargetDomainName=SOC TargetUserName=lab.* EventCode IN (4624,4625) earliest="10/26/2026:15:38:40" latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| stats count(eval(EventCode=4625)) AS failures count(eval(EventCode=4624)) AS successes BY IpAddress TargetUserName</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Network logon failure reasons</title><table><search><query>index=lab_windows host IN (SOC-SRV01,SOC-DC01) Channel=Security TargetDomainName=SOC TargetUserName=lab.* EventCode IN (4624,4625) earliest="10/26/2026:15:38:40" latest="10/26/2026:23:06:00"
+| dedup Computer Channel EventRecordID
+| search EventCode=4625
+| stats count AS records BY LogonType Status SubStatus</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Repeated account: three failures within five minutes</title><table><search><query>index=lab_windows host=SOC-SRV01 Channel=Security TargetDomainName=SOC TargetUserName=lab.repeat EventCode=4625 earliest="10/26/2026:18:39:00" latest="10/26/2026:23:00:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| streamstats time_window=5m count AS failures BY TargetDomainName TargetUserName IpAddress Computer
+| where failures&gt;=3
+| table _time TargetUserName IpAddress failures EventRecordID</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Five accounts from one source within ten minutes</title><table><search><query>index=lab_windows host=SOC-SRV01 Channel=Security EventCode=4625
+ TargetUserName IN (lab.user1,lab.user2,lab.user3,lab.user4,lab.user5)
+ earliest="10/26/2026:18:38:05" latest="10/26/2026:18:48:05"
+| dedup Computer Channel EventRecordID
+| stats dc(TargetUserName) AS accounts values(TargetUserName) AS users BY IpAddress
+| where accounts&gt;=5</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Success after failure: account and time controls</title><table><search><query>index=lab_windows host=SOC-SRV01 Channel=Security EventCode IN (4624,4625) TargetUserName IN (lab.user1,lab.ops) earliest="10/26/2026:18:49:58" latest="10/26/2026:19:26:08"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| eval failed_at=if(EventCode=4625,_time,null())
+| streamstats max(failed_at) AS last_failure BY TargetUserName IpAddress
+| where EventCode=4624
+| eval seconds_since_failure=round(_time-last_failure), matched=if(seconds_since_failure&lt;=300,"yes","no")
+| table _time TargetUserName IpAddress seconds_since_failure matched EventRecordID</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Lockout, administrative unlock and authentication recovery</title><table><search><query>index=lab_windows host=SOC-DC01 Channel=Security EventCode IN (4624,4625,4740,4767) TargetUserName=lab.lockout earliest="10/26/2026:22:00:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time EventCode LogonType IpAddress Status SubStatus EventRecordID</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Disabled-account comparison</title><table><search><query>index=lab_windows Channel=Security TargetUserName=lab.disabled earliest="10/26/2026:21:30:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time host EventCode TargetUserName LogonType IpAddress Status SubStatus EventRecordID</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+<row><panel><title>Scheduled task: authentication comparison</title><table><search><query>index=lab_windows Channel=Security TargetUserName=lab.stale earliest="10/26/2026:11:15:00" latest="10/26/2026:11:49:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time host EventCode LogonType Status SubStatus EventRecordID</query><earliest>0</earliest><latest>now</latest></search>
+<option name="count">20</option><option name="wrap">true</option><option name="drilldown">none</option>
+</table></panel></row>
+</dashboard>

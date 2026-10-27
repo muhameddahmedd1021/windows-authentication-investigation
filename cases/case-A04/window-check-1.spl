@@ -1,0 +1,4 @@
+index=lab_windows host=SOC-SRV01 Channel=Security EventCode=4625 TargetUserName IN
+(lab.user1,lab.user2,lab.user3,lab.user4,lab.user5) earliest=-10m latest=now
+| dedup Computer Channel EventRecordID
+| stats dc(TargetUserName) AS accounts values(TargetUserName) AS users BY IpAddress

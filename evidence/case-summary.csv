@@ -1,0 +1,9 @@
+case,known_lab_context,failed_logon_records,successful_logon_records
+A01,Normal network sign-in,0,1
+A02,Password correction,1,1
+A03,Repeated individual failures and time controls,17,0
+A04,Different accounts from one source,5,0
+A05,Failure then success and negative controls,3,3
+A06,Lockout and administrative recovery,7,1
+A06-D,Administrative disable and enabled-state restoration,2,0
+A07,"Scheduled task: batch-right prerequisite, success and stale credential",2,1

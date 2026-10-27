@@ -1,0 +1,5 @@
+index=lab_windows host=SOC-SRV01 Channel=Security EventCode=4625 TargetUserName=lab.repeat
+earliest="10/26/2026:20:47:00" latest="10/26/2026:20:54:00"
+| dedup Computer Channel EventRecordID
+| bin _time span=5m
+| stats count AS failures BY _time

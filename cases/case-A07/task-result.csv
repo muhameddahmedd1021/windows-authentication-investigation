@@ -1,0 +1,11 @@
+_time,EventCode,TaskName,ResultCode,EventRecordID
+2026-10-26 11:30:29,106,\SOC-Lab-A07-StaleCredential,,2762
+2026-10-26 11:42:09,110,\SOC-Lab-A07-StaleCredential,,2766
+2026-10-26 11:42:09,200,\SOC-Lab-A07-StaleCredential,,2765
+2026-10-26 11:42:09,100,\SOC-Lab-A07-StaleCredential,,2764
+2026-10-26 11:42:09,129,\SOC-Lab-A07-StaleCredential,,2763
+2026-10-26 11:42:10,102,\SOC-Lab-A07-StaleCredential,,2768
+2026-10-26 11:42:10,201,\SOC-Lab-A07-StaleCredential,0,2767
+2026-10-26 11:45:55,110,\SOC-Lab-A07-StaleCredential,,2771
+2026-10-26 11:45:55,101,\SOC-Lab-A07-StaleCredential,2147943726,2770
+2026-10-26 11:45:55,104,,2147943726,2769

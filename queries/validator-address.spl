@@ -1,0 +1,5 @@
+index=lab_windows host=SOC-DC01 Channel=Security EventCode=4771 TargetUserName=lab.stale
+earliest="10/26/2026:11:45:00" latest="10/26/2026:11:46:30"
+| dedup Computer Channel EventRecordID
+| eval source=replace(IpAddress,"^::ffff:","")
+| table _time TargetUserName IpAddress source Status EventRecordID

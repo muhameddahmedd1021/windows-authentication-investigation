@@ -1,0 +1,9 @@
+index=lab_windows host=SOC-SRV01 Channel=Security EventCode IN (4624,4625) TargetUserName IN
+(lab.user1,lab.ops) earliest="10/26/2026:18:49:58" latest="10/26/2026:19:26:08"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| eval failed_at=if(EventCode=4625,_time,null())
+| streamstats max(failed_at) AS last_failure BY TargetUserName IpAddress
+| where EventCode=4624
+| eval seconds_since_failure=round(_time-last_failure), matched=if(seconds_since_failure<=300,"yes","no")
+| table _time TargetUserName IpAddress seconds_since_failure matched EventRecordID

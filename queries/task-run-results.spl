@@ -1,0 +1,5 @@
+index=lab_windows host=SOC-WS01 Channel="Microsoft-Windows-TaskScheduler/Operational"
+"SOC-Lab-A07-StaleCredential" earliest="10/26/2026:11:15:00" latest="10/26/2026:11:49:00"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time EventCode TaskName ResultCode EventRecordID

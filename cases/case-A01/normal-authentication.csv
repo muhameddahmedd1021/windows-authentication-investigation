@@ -1,0 +1,4 @@
+_time,host,EventCode,TargetUserName,LogonType,IpAddress,Status,EventRecordID
+2026-10-26 23:03:13,SOC-WS01,4648,lab.ops,,192.168.144.40,,28615
+2026-10-26 23:03:13,SOC-SRV01,4624,lab.ops,3,192.168.144.30,,22276
+2026-10-26 23:03:13,SOC-DC01,4776,lab.ops,,,0x0,51017

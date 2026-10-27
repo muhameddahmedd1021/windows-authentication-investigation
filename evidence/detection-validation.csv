@@ -1,0 +1,17 @@
+control,expected,observed,evidence
+Two failures in five minutes,Below threshold,2; no candidate,cases/case-A03
+Three failures in five minutes,At threshold,3; candidate,cases/case-A03
+Four failures in five minutes,Above threshold,4; candidate,cases/case-A03
+Spaced failures,Older records expire,Rolling count decreases,cases/case-A03
+Three failures across fixed boundary,Rolling rule detects them,Rolling1/2/3; fixed buckets1/2,rolling-window-boundary.csv;fixed-window-comparison.csv
+Four distinct accounts,Below threshold,4,cases/case-A04
+Five distinct accounts,At threshold,5,cases/case-A04
+Live ten-minute expiry,Old account leaves window,5 then4,cases/case-A04
+Different-account success,No match,No prior failure for lab.ops,cases/case-A05
+Same-account success within300s,Match,103s; yes,cases/case-A05
+Same-account success after300s,No match,918s; no,cases/case-A05
+Correct credential while locked,Rejected,Status0xc0000234,cases/case-A06
+Administrative unlock,Authentication recovers,DC4767 then4624type3,cases/case-A06
+Disabled account,Rejected; restore enabled state,Substatus0xc0000072; enabled restored,cases/case-A06-D
+Task stale credential,Failed batch logon and task launch,4625type4;4771status0x18;task101,cases/case-A07
+IPv4-mapped validator address,Keep raw; compare IPv4 representation,::ffff:192.168.144.30 becomes192.168.144.30,validator-address.csv

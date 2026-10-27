@@ -1,0 +1,10 @@
+IpAddress,TargetUserName,failures,successes
+192.168.144.30,lab.disabled,2,0
+192.168.144.30,lab.lockout,7,1
+192.168.144.30,lab.ops,0,2
+192.168.144.30,lab.repeat,17,0
+192.168.144.30,lab.user1,5,3
+192.168.144.30,lab.user2,1,0
+192.168.144.30,lab.user3,1,0
+192.168.144.30,lab.user4,1,0
+192.168.144.30,lab.user5,1,0

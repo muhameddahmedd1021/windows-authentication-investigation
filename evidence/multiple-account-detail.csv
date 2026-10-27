@@ -1,0 +1,6 @@
+IpAddress,TargetUserName,failures
+192.168.144.30,lab.user1,1
+192.168.144.30,lab.user2,1
+192.168.144.30,lab.user3,1
+192.168.144.30,lab.user4,1
+192.168.144.30,lab.user5,1
