@@ -2,6 +2,8 @@
 
 Compared failed and successful network sign-ins to SOC-Share using File Explorer. Successful drive mappings were disconnected through Explorer before a fresh connection.
 
+This is a correlation test: the correct credential was deliberately supplied for the successful submissions. The comparison checks account, source and timing; it is a separate experiment from the repeated failures against lab.repeat.
+
 ## Read the timeline
 
 Start with the six target logons in time order. Event 4625 is a failure; 4624 is a success. Compare the account and source address before measuring the time gap.

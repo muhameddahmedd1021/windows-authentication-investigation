@@ -1,6 +1,6 @@
 # Windows Authentication Investigation
 
-A Windows domain lab investigation of failed logons, password correction, repeated attempts, account lockout and stale scheduled-task credentials. The aim was to explain each pattern using its account, source, target, timing and failure reason.
+A Windows domain lab for investigating password-guessing patterns and explaining authentication failures. Controlled cases compare repeated failures against one account, several accounts from one source, success after failure, account lockout and ordinary credential problems.
 
 Used File Explorer and Active Directory interfaces for the network authentication comparisons, Task Scheduler for the batch-logon case, and Splunk Search for investigation. Windows events and interface pictures are linked in each case.
 
@@ -32,7 +32,23 @@ Domain: `soc.test` (`SOC`). All event times are UTC. [Lab setup](docs/lab-setup.
 
 The network comparison contains 41 target logon records: 35 failures and 6 successes. These are event counts; Explorer sometimes retried a single credential submission. Supporting DC and source records are kept separately rather than added as extra attempts. The scheduled-task case has its own batch-logon timeline.
 
-Repeated failures and a following success are useful investigation leads. The lab's known password-correction and task examples show why counts alone are not a verdict.
+## Investigation results
+
+| Test | Result |
+|---|---|
+| Repeated failures against one account | The moving five-minute search identified groups at and above the three-event threshold. All submissions in that case were rejected. |
+| Several accounts from one source | The search identified five targeted accounts, matching the original target failure records. All five submissions were rejected. |
+| Failure followed by success | The same-account success after 103 seconds matched the time condition. A different account and a 918-second gap did not. |
+| Account state | Locked and disabled accounts produced distinct rejection reasons. Administrative unlock restored authentication in the lockout case. |
+| Ordinary credential problems | Password correction explained one failure/success pair. The task comparison separated a missing logon right from a stale stored password. |
+
+The repeated-failure and account-spread cases model password-guessing and password-spraying patterns. The known lab actions supply the test context; the Windows records establish the accounts, source, target, timing and outcomes. The normal and administrative comparisons help interpret similar-looking failures.
+
+## Tested alert
+
+The scheduled **Repeated authentication failures - lab validation** alert was tested against the recorded repeated-failure case. It triggered in Splunk, and its scheduled results and suppression behavior were checked. The other case investigations use saved searches and their result evidence. The [dashboard and alert page](docs/dashboard-and-alert.md) records that validation.
+
+The existing failure/success case is a controlled correlation test. The correct password was deliberately supplied; its successful logon is separate from the repeated-failure experiment on lab.repeat.
 
 ## Searches and evidence
 
