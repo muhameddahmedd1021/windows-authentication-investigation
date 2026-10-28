@@ -10,7 +10,7 @@ Each search answers one question. The files use the actual lab index and hosts; 
 | Why did network logons fail? | [Failure reasons](failure-reasons.spl) |
 | Did one account reach three failures in five minutes? | [Repeated failures](repeated-failure-candidates.spl) |
 | Did one source try five accounts in ten minutes? | [Distinct accounts](multiple-account-candidates.spl), [per-account counts](multiple-account-detail.spl) |
-| Was success preceded by a failure for the same account and source? | [Success comparison](success-comparison.spl) |
+| Was success preceded by a failure for the same account and source? | [Failure/success timeline](../cases/case-A05/authentication-timeline.spl), [calculated gaps](success-comparison.spl) |
 | Was the account locked, unlocked and able to authenticate again? | [Lockout recovery](lockout-recovery.spl) |
 | Was the account disabled? | [Disabled account](disabled-account.spl) |
 | Did the scheduled task fail at authentication or during its action? | [Authentication](task-authentication.spl), [task results](task-run-results.spl) |
@@ -22,4 +22,4 @@ Each search answers one question. The files use the actual lab index and hosts; 
 
 The network summaries explicitly select the SOC domain and the target machines. Supporting credential-validation events are investigated in their own searches. For the Kerberos example, `replace` removes the IPv4-mapped prefix for comparison while keeping the original `IpAddress` column. Missing addresses are not assigned a shared attacker address.
 
-The success search carries forward the latest failure for each account and source, then measures the gap at successful events. Its displayed yes/no result makes the different-account and late-success controls visible. The known case labels in the case summary come from the lab timeline; they are separate from the event fields.
+Start the failure/success check with the timeline: 4625 is a failed logon and 4624 is a successful one. Read the time, account and address together before comparing the gaps. The separate calculated-gaps search carries forward the latest failure for each account and source, then measures the gap at successful events. Its yes/no result applies the five-minute condition. The known case labels in the case summary come from the lab timeline; they are separate from the event fields.

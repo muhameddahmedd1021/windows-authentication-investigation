@@ -1,0 +1,5 @@
+index=lab_windows host=SOC-SRV01 Channel=Security EventCode IN (4624,4625) TargetUserName IN (lab.user1,lab.ops)
+earliest="10/26/2026:18:49:58" latest="10/26/2026:19:26:08"
+| dedup Computer Channel EventRecordID
+| sort 0 _time
+| table _time TargetUserName EventCode IpAddress EventRecordID
